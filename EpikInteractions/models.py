@@ -344,6 +344,23 @@ class GuildMember:
 class PartialGuildMember(User):
     ...
 
+class Emoji:
+    def __init__(self, data: dict):
+        self.id: str = data["id"]
+        self.name: str = data["name"]
+        self.user: User | None = User(data.get("user")) if data.get("user") else None
+        self.roles: list[str] | None = data.get("roles")
+        self.require_colons: bool | None = data.get("require_colons")
+        self.managed: bool | None = data.get("managed")
+        self.animated: bool | None = data.get("animated")
+        self.available: bool | None = data.get("available")
+
+class Reaction:
+    def __init__(self, data: dict):
+        self.count: int = data["count"]
+        self.me: bool = data["me"]
+        self.emoji: Emoji = data["emoji"]
+
 class Message:
     def __init__(self, data):
         self.id: str
@@ -361,6 +378,7 @@ class Message:
         self.mention_channels: list[ChannelMention]
         self.attachments: list[Attachment]
         self.embeds: list[Embed]
+        self.reactions: list[Reaction]
 
 class Interaction(BaseModel):
     """
