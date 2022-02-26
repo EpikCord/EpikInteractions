@@ -12,3 +12,5 @@ I'll be working on docstrings from the start, and then utilise them for docs. Ev
 
 ## What happened to EpikCord.py?
 Nothing. This is a more lightweight library because we don't wrap ***everything***.
+
+You will require Python 3.10 or above.
