@@ -49,8 +49,7 @@ class IntegerCommandOption(StringCommandOption):
     def __init__(self, *, name: str, description: str, required: bool = False, choices: list[OptionChoice] = []):
         super().__init__(name=name, description=description, required=required, choices = choices)
         self.type = 4
-        self.
-
+        self
 
 
 
