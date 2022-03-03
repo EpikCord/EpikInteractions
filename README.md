@@ -1,7 +1,7 @@
 # EpikInteractions.py
 ## What is it?
 --------------
-EpikInteractions.py is a ultra lightweight library for handling HTTP Interactions for Discord's API Wrapper, removing the need to use the Websocket Connection, and being very light.
+EpikInteractions.py is an ultra lightweight library for handling HTTP Interactions for Discord's API Wrapper, removing the need to use the Websocket Connection, and being very light.
 
 ## How to use it?
 ------------------
