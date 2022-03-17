@@ -212,10 +212,21 @@ AnyOption = Union[Subcommand, SubCommandGroup, StringOption, IntegerOption, Bool
 
 
 class UserCommand:
-    def __init__(self, *, name: str, description: str, callback: callable): # TODO: Check if you can make GuildUserCommands etc
+    def __init__(self, *, name: str, callback: callable):
         self.name: str = name
-        self.description: str = description
         self.callback: callable = callback
+    
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "callback": self.callback
+        }
+    
+    def to_discord_command_dict(self):
+        return {
+            "name": self.name,
+            "type": 2
+        }
 
 class SlashCommand(UserCommand):
     def __init__(self, *, name: str, description: str, callback: callable, guild_ids: Optional[list[str]], options: Optional[list[AnyOption]]):
@@ -223,5 +234,23 @@ class SlashCommand(UserCommand):
         self.guild_ids: list[str] | None = guild_ids
         self.options: list[AnyOption] | None = options
 
+    def to_dict(self):
+        usual_dict = super().to_dict()
+        if self.guild_ids:
+            usual_dict["guild_ids"] = self.guild_ids
+        if self.options:
+            usual_dict["options"] = self.options
+        return usual_dict
+    
+    def to_discord_command_dict(self):
+        usual_dict = super().to_discord_command_dict()
+        if self.guild_ids:
+            usual_dict["guild_ids"] = self.guild_ids
+        if self.options:
+            usual_dict["options"] = self.options
+        return usual_dict
+
 class MessageCommand(UserCommand):
-    ...
+    def to_discord_command_dict(self):
+        usual_dict = super().to_discord_command_dict()
+        usual_dict["type"] = 3
